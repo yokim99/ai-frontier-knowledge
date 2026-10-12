@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trae 在 B站的视频传播策略洞察报告</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  :root {
+    --hw-red: #C7000B;
+    --hw-red-deep: #9c0008;
+    --hw-red-light: #fdeaea;
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --text: #1f2329;
+    --text-sub: #646a73;
+    --text-light: #8f959e;
+    --border: #e5e6eb;
+    --accent-blue: #3370ff;
+    --accent-green: #00b42a;
+    --accent-orange: #ff7d00;
+    --accent-gold: #f7ba1e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+  .topbar {
+    background: linear-gradient(135deg, #C7000B 0%, #8a0006 100%);
+    color: #fff;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(199,0,11,0.25);
+  }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 52px; font-size: 14px; }
+  .topbar .brand { font-weight: 700; letter-spacing: 0.5px; }
+  .topbar nav a { color: rgba(255,255,255,0.92); text-decoration: none; margin-left: 22px; font-size: 13.5px; transition: color .2s; }
+  .topbar nav a:hover { color: #fff; text-decoration: underline; }
+
+  header {
+    background: linear-gradient(160deg, #C7000B 0%, #9c0008 100%);
+    color: #fff;
+    padding: 52px 0 46px;
+  }
+  header .kicker {
+    display: inline-block;
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 999px;
+    padding: 3px 14px;
+    font-size: 12.5px;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+  header h1 { font-size: 32px; font-weight: 700; line-height: 1.4; margin-bottom: 14px; }
+  header .subtitle { font-size: 15.5px; color: rgba(255,255,255,0.9); max-width: 780px; }
+  header .meta {
+    margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px;
+    font-size: 12.5px; color: rgba(255,255,255,0.85);
+  }
+  header .meta span {
+    background: rgba(255,255,255,0.12);
+    border-radius: 6px; padding: 4px 12px;
+  }
+
+  .content { padding: 34px 0 60px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 30px;
+    margin-bottom: 22px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .card h2 {
+    font-size: 21px; font-weight: 700; color: var(--text);
+    padding-bottom: 12px; margin-bottom: 18px;
+    border-bottom: 2px solid var(--hw-red);
+    position: relative;
+  }
+  .card h2 .num {
+    display: inline-block;
+    color: #fff; background: var(--hw-red);
+    border-radius: 6px; font-size: 14px;
+    padding: 2px 10px; margin-right: 10px; vertical-align: 2px;
+  }
+  .card h3 {
+    font-size: 16px; font-weight: 700; color: var(--hw-red-deep);
+    margin: 22px 0 10px;
+  }
+  .card h3:first-of-type { margin-top: 0; }
+  .card p { color: var(--text-sub); margin-bottom: 10px; }
+  .card strong { color: var(--text); }
+  .card ul, .card ol { margin: 6px 0 14px 22px; color: var(--text-sub); }
+  .card li { margin-bottom: 6px; }
+  .card a { color: var(--hw-red); text-decoration: none; }
+  .card a:hover { text-decoration: underline; }
+  .card a.link { color: var(--accent-blue); }
+
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 22px; }
+  .kpi {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    border-top: 3px solid var(--hw-red);
+  }
+  .kpi .label { font-size: 13px; color: var(--text-light); margin-bottom: 6px; }
+  .kpi .value { font-size: 26px; font-weight: 700; color: var(--hw-red); line-height: 1.2; }
+  .kpi .value small { font-size: 13px; color: var(--text-sub); font-weight: 400; }
+  .kpi .desc { font-size: 12px; color: var(--text-sub); margin-top: 4px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0 8px; }
+  table th, table td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  table th { background: var(--hw-red-light); color: var(--hw-red-deep); font-weight: 700; white-space: nowrap; }
+  table tr:nth-child(even) td { background: #fafbfc; }
+  table td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tag {
+    display: inline-block; font-size: 11.5px; padding: 1px 8px; border-radius: 4px;
+    margin: 1px 2px; white-space: nowrap;
+  }
+  .tag.red { background: var(--hw-red-light); color: var(--hw-red-deep); }
+  .tag.blue { background: #e8f1ff; color: #1d5bbf; }
+  .tag.green { background: #e8ffea; color: #16853a; }
+  .tag.orange { background: #fff1e5; color: #c25d00; }
+  .tag.gold { background: #fff8e1; color: #9a6b00; }
+  .tag.gray { background: #f0f1f3; color: #646a73; }
+
+  .callout {
+    border-left: 4px solid var(--hw-red);
+    background: var(--hw-red-light);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px; margin: 14px 0;
+    font-size: 14px; color: var(--text);
+  }
+  .callout.blue { border-left-color: var(--accent-blue); background: #eef4ff; }
+  .callout .callout-title { font-weight: 700; margin-bottom: 4px; color: var(--hw-red-deep); }
+  .callout.blue .callout-title { color: #1d5bbf; }
+
+  .chart-box { width: 100%; height: 380px; margin: 12px 0 6px; }
+  .chart-box.tall { height: 420px; }
+  .chart-note { font-size: 12.5px; color: var(--text-light); margin-top: 4px; }
+
+  .formula {
+    background: #fafafa; border: 1px dashed #d0d3d9; border-radius: 8px;
+    padding: 12px 16px; margin: 8px 0 14px; font-size: 14px;
+  }
+  .formula .f { color: var(--hw-red); font-weight: 700; font-family: "SFMono-Regular", Consolas, "Courier New", monospace; }
+  .formula .who { color: var(--text-light); font-size: 12.5px; }
+
+  .strategy-item {
+    display: flex; gap: 14px; margin-bottom: 14px;
+    padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px;
+    background: #fcfcfd;
+  }
+  .strategy-item .idx {
+    flex: 0 0 34px; height: 34px; border-radius: 8px;
+    background: var(--hw-red); color: #fff; font-weight: 700; font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .strategy-item .body { flex: 1; }
+  .strategy-item .body .t { font-weight: 700; font-size: 15px; color: var(--text); margin-bottom: 4px; }
+  .strategy-item .body .d { color: var(--text-sub); font-size: 13.5px; }
+
+  .footer-note {
+    background: #fff; border: 1px solid var(--border); border-radius: 12px;
+    padding: 22px 28px; margin-top: 8px; font-size: 12.5px; color: var(--text-sub);
+  }
+  .footer-note h4 { color: var(--text); font-size: 14px; margin-bottom: 8px; }
+  .footer-note a { color: var(--accent-blue); }
+
+  @media (max-width: 860px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .topbar nav a { display: none; }
+    header h1 { font-size: 24px; }
+    .card { padding: 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand">Trae 营销情报 · 策略洞察</div>
+    <nav>
+      <a href="#summary">核心结论</a>
+      <a href="#theme">内容主题</a>
+      <a href="#structure">结构设计</a>
+      <a href="#selling">卖点提炼</a>
+      <a href="#copy">文案规律</a>
+      <a href="#data">数据验证</a>
+      <a href="#advice">营销启发</a>
+    </nav>
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">B站视频传播策略深度洞察</div>
+    <h1>Trae 在 B站的视频传播策略洞察报告</h1>
+    <div class="subtitle">
+      基于 6 个 Trae 相关热门视频的结构级深析数据，从内容主题、结构设计、卖点提炼、文案规律四个维度拆解，
+      并以播放量、点赞、投币、收藏、发布时间、UP主粉丝量做交叉验证，提炼可复用于 AI Coding 产品营销的传播打法。
+    </div>
+    <div class="meta">
+      <span>数据采集时间：2026-08-19</span>
+      <span>数据来源：B站公开 API</span>
+      <span>样本：6 个视频</span>
+      <span>分析视角：内容传播策略</span>
+    </div>
+  </div>
+</header>
+
+<div class="content wrap">
+
+  <!-- 核心结论 KPI -->
+  <div class="kpi-grid" id="summary">
+    <div class="kpi">
+      <div class="label">最高播放单条</div>
+      <div class="value">102.6<small> 万</small></div>
+      <div class="desc">韩顺平《保姆级教程》（18P）</div>
+    </div>
+    <div class="kpi">
+      <div class="label">最高收藏率</div>
+      <div class="value">5.50<small>%</small></div>
+      <div class="desc">瑞哥编程课堂（SEO 长尾）</div>
+    </div>
+    <div class="kpi">
+      <div class="label">最高点赞率</div>
+      <div class="value">3.61<small>%</small></div>
+      <div class="desc">数字游牧人（对比评测）</div>
+    </div>
+    <div class="kpi">
+      <div class="label">播放÷粉丝出圈倍数</div>
+      <div class="value">2.08<small>x</small></div>
+      <div class="desc">韩顺平，内容驱动型出圈</div>
+    </div>
+  </div>
+
+  <!-- 核心结论 -->
+  <div class="card">
+    <h2><span class="num">摘要</span>一句话核心策略结论</h2>
+    <div class="callout">
+      <div class="callout-title">核心结论</div>
+      <p style="margin:0">
+        在 B站，Trae 的传播力几乎完全由 <strong>第三方 UP主（KOL）</strong> 而非官方账号驱动——官方号仅 4.47 万粉丝，
+        而单条保姆级教程即可破百万播放。最有效的组合打法为：
+        <strong>「保姆级 + 多P系统教程」扛流量基本盘、「单点实操干货」抓高留存、「对比评测」做情绪心智卡位</strong>，
+        三者叠加「免费 + 国产替代 Cursor + 全功能」的卖点体系，构成 Trae 在 B站可复用的最优内容模型。
+      </p>
+    </div>
+    <p>
+      本报告基于 B站公开 API 实时抓取的 6 个 Trae 相关热门视频（含标题、分P章节、简介、卖点、播放/点赞/投币/收藏、
+      发布时间、UP主粉丝数、播放÷粉丝倍数等字段），对内容主题、结构设计、卖点提炼、文案规律进行结构化拆解，
+      并通过数据交叉验证得出「什么内容形态在 B站最有效」的量化结论。
+    </p>
+  </div>
+
+  <!-- 一、内容主题分类 -->
+  <div class="card" id="theme">
+    <h2><span class="num">一</span>内容主题类型：六类题材，各有分工</h2>
+    <p>
+      Trae 在 B站的内容并非单一「教程」，而是形成了 <strong>六类题材、功能互补</strong> 的矩阵：
+      系统教程负责「沉淀与搜索截流」，横评/对比负责「曝光与心智」，单点实操负责「热点卡位与留存」，
+      场景测评负责「垂直人群触达」，SEO 长尾负责「冷启动拉新」。下表为六类题材与对应视频的完整映射。
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:120px">内容主题类型</th>
+          <th>对应视频 / UP主</th>
+          <th style="width:120px">分P数</th>
+          <th>类型特征</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag red">保姆级系统教程</span></td>
+          <td>韩顺平《Trae 保姆级教程｜AI 编程工具完整入门》<a class="link" href="https://www.bilibili.com/video/BV1PwBuBtEZo" target="_blank">BV1PwBuBtEZo</a></td>
+          <td class="num">18P</td>
+          <td>低门槛承诺 + 体系化章节 + 多场景实战，覆盖全套核心能力（CUE/智能体/SOLO/Rules），主打「从零上手到能做项目」的完整学习闭环。</td>
+        </tr>
+        <tr>
+          <td><span class="tag blue">横向评测</span></td>
+          <td>程序员鱼皮《从夯到拉，锐评 32 个 AI 编程工具！》<a class="link" href="https://www.bilibili.com/video/BV1cq5q6CEu3" target="_blank">BV1cq5q6CEu3</a></td>
+          <td class="num">1P</td>
+          <td>把 Trae 放进「32 个工具」横评语境，作为国产代表之一软性植入，借头部海外工具流量获得曝光，覆盖面广、可信度高。</td>
+        </tr>
+        <tr>
+          <td><span class="tag green">单点实操干货</span></td>
+          <td>我是阿众《手把手教你在 TRAE 中创建和使用 Skills》<a class="link" href="https://www.bilibili.com/video/BV1ZTzpBWEhF" target="_blank">BV1ZTzpBWEhF</a></td>
+          <td class="num">1P</td>
+          <td>5 分钟短平快，抓住 Agent Skill 热点概念做「概念科普 + 实操演示 + 场景价值 + 资源延伸」闭环，干货密度极高、留存最强。</td>
+        </tr>
+        <tr>
+          <td><span class="tag orange">竞品对比评测</span></td>
+          <td>数字游牧人《巅峰对决，Cursor TRAE 对比评测》<a class="link" href="https://www.bilibili.com/video/BV1Cx6oBAETu" target="_blank">BV1Cx6oBAETu</a></td>
+          <td class="num">1P</td>
+          <td>「国产新锐 vs 海外标杆」正面硬刚，用对抗悬念制造站队与讨论，借 Cursor 流量做大入口，情绪认同最强、易引发点赞与评论争议。</td>
+        </tr>
+        <tr>
+          <td><span class="tag gold">垂直场景测评</span></td>
+          <td>戴戴戴师兄《AI工具测评：TraeWork 能搞定完整数据分析工作流吗？》<a class="link" href="https://www.bilibili.com/video/BV1JRuq6YECr" target="_blank">BV1JRuq6YECr</a></td>
+          <td class="num">1P</td>
+          <td>聚焦「数据分析工作流」这一具体垂直命题，切入数据分析/数分转型人群，属场景验证型，但存在「题材错位」风险。</td>
+        </tr>
+        <tr>
+          <td><span class="tag gray">SEO 长尾教程</span></td>
+          <td>瑞哥编程课堂《【带小白学AI】trae 使用教程 从入门到精通》<a class="link" href="https://www.bilibili.com/video/BV1hZub6bEk4" target="_blank">BV1hZub6bEk4</a></td>
+          <td class="num">13P</td>
+          <td>纯 SEO 关键词堆砌打法，不靠人设流量、靠长尾关键词截流搜索意图，是低粉账号冷启动的典型路径。</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout blue">
+      <div class="callout-title">洞察：六类题材是「漏斗式」分工</div>
+      <p style="margin:0">
+        横评/对比（曝光层）→ 系统教程（沉淀层）→ 单点实操（留存层）→ 场景测评（垂直层）→ SEO 长尾（拉新层）。
+        Trae 的传播策略本质是让不同题材各司其职，而非依赖单一「硬广」。
+      </p>
+    </div>
+  </div>
+
+  <!-- 二、内容结构设计 -->
+  <div class="card" id="structure">
+    <h2><span class="num">二</span>内容结构设计：标题 / 分P / 简介的三层钩子</h2>
+
+    <h3>2.1 标题结构：五种钩子类型</h3>
+    <p>标题是 B站内容的第一道流量闸门。6 个视频的标题可归纳为五种钩子类型，其「钩人」机制各有侧重：</p>
+    <table>
+      <thead>
+        <tr><th style="width:130px">钩子类型</th><th>标题示例</th><th>钩子机制</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag red">低门槛承诺</span></td>
+          <td>韩顺平「Trae 保姆级教程｜AI 编程工具完整入门，实战项目手把手教学」；阿众「手把手教你…小白一看就懂！」</td>
+          <td>用「保姆级」「手把手」「小白一看就懂」对冲「AI 编程」的技术焦虑，精准定位零基础人群，最大化点击意愿。</td>
+        </tr>
+        <tr>
+          <td><span class="tag blue">数字规模</span></td>
+          <td>鱼皮「锐评 32 个 AI 编程工具！」</td>
+          <td>数字「32」制造「一网打尽」的全面感，暗示信息量大、一次看全，吸引有比较需求的泛开发者。</td>
+        </tr>
+        <tr>
+          <td><span class="tag orange">悬念梗 / 态度词</span></td>
+          <td>鱼皮「从夯到拉，锐评 32 个…」</td>
+          <td>「从夯到拉」用网络热梗制造「到底有多拉」的好奇心，「锐评」暗示吐槽犀利有落差，激发点开欲望。</td>
+        </tr>
+        <tr>
+          <td><span class="tag orange">对抗对比</span></td>
+          <td>数字游牧人「巅峰对决，Cursor TRAE 对比评测」</td>
+          <td>「巅峰对决」营造强冲突，把 Trae 与行业标杆 Cursor 放同台，借 Cursor 的流量与认知度为 Trae 引流。</td>
+        </tr>
+        <tr>
+          <td><span class="tag gray">SEO 堆砌</span></td>
+          <td>瑞哥「【带小白学AI】【已完结】trae使用教程 课程实战 Trae AI 从入门到精通 小白学AI必备教程 Trae学习指南」</td>
+          <td>把 7 组关键词全部塞进标题，最大化覆盖 B站站内搜索词，人群定位「小白」重复 3 次强化低门槛心智。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>2.2 分P / 章节编排逻辑：三段式为主流</h3>
+    <p>两个多P教程（韩顺平 18P、瑞哥 13P）均采用经典 <strong>「认知 → 能力拆解 → 实战」三段式</strong>，形成「能上手 → 会配置 → 能做项目」的学习闭环：</p>
+    <ul>
+      <li><strong>韩顺平 18P</strong>：01-03 认知（介绍/安装/体验）→ 04-13 能力拆解（CUE/智能体/SOLO/上下文/Rules/#引用）→ 14-18 实战（数据可视化/文档/坦克大战小游戏/Kimi插件/Figma页面）。前 3P 完成上手，中间 10P 系统拆功能，后 5P 用 5 个不同场景实战收尾。</li>
+      <li><strong>瑞哥 13P</strong>：课程介绍/安装配置 → 功能系统拆解（提示词/SOLO/Agent/MCP/CUE/模型/索引/Skills/Rules）→ 综合项目练习。功能覆盖比韩顺平更细（多出 MCP、模型、提示词模板），但缺实战案例多样性。</li>
+    </ul>
+    <p>单P视频则采用更轻的编排：鱼皮用「五维评分体系」做横向对比框架；阿众用「概念科普 + 实操演示 + 场景价值 + 资源延伸」四段式；数字游牧人零文案、纯靠标题与封面完成全部钩子。</p>
+
+    <h3>2.3 简介引导话术：五种转化落点</h3>
+    <p>视频简介（desc）是 B站内容沉淀私域、引导转化的关键阵地。6 个视频呈现五种明确的引导落点：</p>
+    <table>
+      <thead>
+        <tr><th style="width:150px">引导类型</th><th>对应视频</th><th>具体话术</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag red">三连引导</span></td>
+          <td>韩顺平 / 鱼皮</td>
+          <td>「如果这个视频对你有帮助，记得【一键三连】，支持一下老韩」；「记得三连支持、关注鱼皮」——用亲切自称建立人设，直白求三连。</td>
+        </tr>
+        <tr>
+          <td><span class="tag red">免费资料引流</span></td>
+          <td>韩顺平</td>
+          <td>「视频配套工具包+学习资料，评论区置顶免费领取」——用「免费领资料」钩子沉淀到评论区置顶，引导关注与三连。</td>
+        </tr>
+        <tr>
+          <td><span class="tag blue">个人网站 + 开源仓库双引流</span></td>
+          <td>鱼皮</td>
+          <td>「编程学习教程+实战项目+简历模板：codefather.cn」「开源 AI 编程教程：github.com/liyupi/ai-guide」——把泛流量沉淀为私域与开发者关注。</td>
+        </tr>
+        <tr>
+          <td><span class="tag green">热点词背书顺势落地</span></td>
+          <td>阿众</td>
+          <td>「Agent Skill 这个词最早由 Anthropic 提出…现在 Cursor、Codex、Antigravity 以及字节的 TRAE 都在第一时间适配」——蹭 Anthropic/Claude Code 热点词背书，再顺势落到 Trae。</td>
+        </tr>
+        <tr>
+          <td><span class="tag gray">外部课程站转化</span></td>
+          <td>瑞哥</td>
+          <td>「教学课件：https://ai.javadh.com/course/…」——6 个视频中唯一用「外部课程站」做转化落点，商业化意图明确。</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>此外，戴戴戴师兄在简介埋「下一期，我们继续用同一套标准」的系列化钩子，并用「大家还想看哪款 AI 工具接受测试，欢迎留言」做评论区互动钩子，为下期选题收集素材。</p>
+  </div>
+
+  <!-- 三、有效卖点提炼 -->
+  <div class="card" id="selling">
+    <h2><span class="num">三</span>有效卖点提炼：哪些卖点被反复使用且有效</h2>
+    <p>将 6 个视频的卖点话术去重后，可提炼出 Trae 在 B站被反复使用的核心卖点体系。下表按「使用频次」排序，并用播放/收藏/点赞数据佐证其有效性：</p>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:150px">卖点</th>
+          <th style="width:90px">出现频次</th>
+          <th>代表视频</th>
+          <th>数据佐证（有效性）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>免费 / 免费教程</strong></td>
+          <td class="num">4 / 6</td>
+          <td>韩顺平、数字游牧人、瑞哥、阿众</td>
+          <td>免费是最大公约数卖点。韩顺平以「免费 + 保姆级」拿下 102.6 万播放（2.08x 出圈），证明「免费」是撬动泛流量点击的核心杠杆。</td>
+        </tr>
+        <tr>
+          <td><strong>国产替代 Cursor</strong></td>
+          <td class="num">4 / 6</td>
+          <td>数字游牧人、鱼皮、阿众、韩顺平</td>
+          <td>数字游牧人「巅峰对决 Cursor vs Trae」拿下 3.61% 点赞率（6 视频最高），证明「国产替代」是激发情绪认同、站队点赞的最强心智卖点。</td>
+        </tr>
+        <tr>
+          <td><strong>全功能 / 完整入门</strong></td>
+          <td class="num">4 / 6</td>
+          <td>韩顺平、瑞哥、鱼皮、阿众</td>
+          <td>韩顺平 18P 覆盖 CUE/智能体/SOLO/Rules 全套能力，3.00% 收藏率（教程类第二高），说明「全功能」是支撑长尾收藏的核心价值。</td>
+        </tr>
+        <tr>
+          <td><strong>提效 / 工作流自动化</strong></td>
+          <td class="num">3 / 6</td>
+          <td>戴戴戴师兄、瑞哥、韩顺平</td>
+          <td>戴戴戴师兄聚焦「完整数据分析工作流」但仅 0.20x 倍数，说明「提效」作为抽象卖点本身不足以引爆，需落到具体具象场景。</td>
+        </tr>
+        <tr>
+          <td><strong>SOLO / Agent / Skills</strong></td>
+          <td class="num">2 / 6</td>
+          <td>阿众（Skills）、韩顺平（SOLO）</td>
+          <td>阿众 Skills 教程 4.56% 收藏率（大体量视频中最高），证明「新概念实操」是抓高留存、强复看的利器，热点概念 + 手把手演示最有效。</td>
+        </tr>
+        <tr>
+          <td><strong>性价比 / 横评带出</strong></td>
+          <td class="num">1 / 6</td>
+          <td>鱼皮</td>
+          <td>鱼皮把 Trae 作为「国产代表」放进 32 工具横评，2,511 条评论（6 视频最高），说明横评语境能带来高讨论度与广度曝光。</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <div class="callout-title">卖点有效性结论</div>
+      <p style="margin:0">
+        <strong>「免费」是流量杠杆（撬动点击），「国产替代 Cursor」是情绪杠杆（撬动点赞），
+        「全功能 + 保姆级」是留存杠杆（撬动收藏），「新概念实操（Skills/SOLO）」是高留存杠杆。</strong>
+        四者组合构成 Trae 在 B站最有效的卖点矩阵；而「提效」这类抽象卖点需绑定具体场景才有效。
+      </p>
+    </div>
+  </div>
+
+  <!-- 四、文案设计规律 -->
+  <div class="card" id="copy">
+    <h2><span class="num">四</span>文案设计规律：可复用的文案公式</h2>
+    <p>将 6 个视频的标题、简介、章节命名去模式化后，可提炼出以下可复用的文案公式，供 AI Coding 产品营销直接套用：</p>
+
+    <div class="formula">
+      <div class="f">公式一：「产品名 + 保姆级/手把手 + 小白一看就懂」</div>
+      <div class="who">来源：韩顺平、阿众 ｜ 用途：系统教程 / 实操干货，主打低门槛引流</div>
+      <div style="margin-top:6px;color:#646a73">适用：面向零基础泛人群的入门内容，用两个低门槛词对冲技术焦虑，最大化点击率与搜索截流。</div>
+    </div>
+
+    <div class="formula">
+      <div class="f">公式二：「巅峰对决 + 竞品名 + 对比评测」</div>
+      <div class="who">来源：数字游牧人 ｜ 用途：竞品对比评测，主打情绪心智卡位</div>
+      <div style="margin-top:6px;color:#646a73">适用：借行业标杆（如 Cursor）流量做大入口，用对抗悬念制造站队与讨论，适合做品牌曝光与「国产替代」心智占位。</div>
+    </div>
+
+    <div class="formula">
+      <div class="f">公式三：「热梗/悬念 + 锐评 + 数字规模 + 领域词」</div>
+      <div class="who">来源：程序员鱼皮 ｜ 用途：横评带出，主打广度曝光</div>
+      <div style="margin-top:6px;color:#646a73">适用：与头部 UP主合作横评/榜单，让产品作为「国产代表」软性植入高播放选题，低成本获得泛流量曝光。</div>
+    </div>
+
+    <div class="formula">
+      <div class="f">公式四：「手把手教你 + 具体动作 + 热点新概念 + 小白一看就懂」</div>
+      <div class="who">来源：我是阿众 ｜ 用途：单点实操干货，主打高留存</div>
+      <div style="margin-top:6px;color:#646a73">适用：紧跟 Agent Skill、MCP、SOLO 等 AI 圈热点概念，把抽象概念落成「创建和使用」等可执行动作，5-8 分钟短平快单点爆破。</div>
+    </div>
+
+    <div class="formula">
+      <div class="f">公式五：「栏目名 + 产品名 + 能搞定[具体场景]吗？（设问）」</div>
+      <div class="who">来源：戴戴戴师兄 ｜ 用途：垂直场景测评，主打垂类触达</div>
+      <div style="margin-top:6px;color:#646a73">适用：切入数据分析、办公等垂直人群，用「能否跑通完整工作流」等设问勾住目标受众，但需注意与 UP主既有粉丝盘匹配。</div>
+    </div>
+
+    <div class="formula">
+      <div class="f">公式六：「带小白学AI + [关键词堆砌] + 从入门到精通」</div>
+      <div class="who">来源：瑞哥编程课堂 ｜ 用途：SEO 长尾，主打冷启动拉新</div>
+      <div style="margin-top:6px;color:#646a73">适用：低粉账号冷启动，靠长尾关键词在搜索结果截流「trae 教程」「从入门到精通」等搜索意图，作品反哺账号。</div>
+    </div>
+  </div>
+
+  <!-- 五、数据交叉验证 -->
+  <div class="card" id="data">
+    <h2><span class="num">五</span>数据交叉验证：什么内容形态最有效</h2>
+    <p>
+      下表为 6 个视频的完整量化数据（2026-08-19 实时抓取），并计算了 <strong>播放÷粉丝倍数（出圈度）</strong>、
+      <strong>收藏率（留存度）</strong>、<strong>点赞率（认同度）</strong> 三个派生指标做交叉分析。
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>UP主</th><th>发布时间</th><th>分P</th><th>播放</th><th>点赞</th><th>投币</th><th>收藏</th>
+          <th>粉丝数</th><th>倍数</th><th>收藏率</th><th>点赞率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>韩顺平</td><td>2025-12-23</td><td class="num">18P</td>
+          <td class="num">1,026,019</td><td class="num">10,553</td><td class="num">7,376</td><td class="num">30,779</td>
+          <td class="num">492,778</td><td class="num"><strong>2.08x</strong></td><td class="num">3.00%</td><td class="num">1.03%</td>
+        </tr>
+        <tr>
+          <td>程序员鱼皮</td><td>2026-05-15</td><td class="num">1P</td>
+          <td class="num">627,094</td><td class="num">13,898</td><td class="num">2,980</td><td class="num">15,576</td>
+          <td class="num">993,924</td><td class="num">0.63x</td><td class="num">2.48%</td><td class="num">2.22%</td>
+        </tr>
+        <tr>
+          <td>我是阿众</td><td>2026-01-22</td><td class="num">1P</td>
+          <td class="num">334,372</td><td class="num">7,319</td><td class="num">2,573</td><td class="num">15,233</td>
+          <td class="num">581,068</td><td class="num">0.58x</td><td class="num"><strong>4.56%</strong></td><td class="num">2.19%</td>
+        </tr>
+        <tr>
+          <td>数字游牧人</td><td>2026-01-12</td><td class="num">1P</td>
+          <td class="num">259,192</td><td class="num">9,353</td><td class="num">757</td><td class="num">3,095</td>
+          <td class="num">421,178</td><td class="num">0.62x</td><td class="num">1.19%</td><td class="num"><strong>3.61%</strong></td>
+        </tr>
+        <tr>
+          <td>戴戴戴师兄</td><td>2026-08-11</td><td class="num">1P</td>
+          <td class="num">81,472</td><td class="num">415</td><td class="num">34</td><td class="num">143</td>
+          <td class="num">415,643</td><td class="num">0.20x</td><td class="num">0.18%</td><td class="num">0.51%</td>
+        </tr>
+        <tr>
+          <td>瑞哥编程课堂</td><td>2026-08-07</td><td class="num">13P</td>
+          <td class="num">5,784</td><td class="num">139</td><td class="num">130</td><td class="num">318</td>
+          <td class="num">187</td><td class="num">30.93x</td><td class="num"><strong>5.50%</strong></td><td class="num">2.40%</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="chart-note">注：瑞哥 30.93x 为「低粉丝基数导致的虚高出圈」（仅 187 粉），不与其 5,784 的绝对播放混同判断；其收藏率 5.50%、投币率 2.25% 均最高，说明 SEO 精准学习用户留存意愿极强。</div>
+
+    <h3>图 1 · 6 视频播放量与点赞量对比（对数刻度）</h3>
+    <div class="chart-box tall" id="chart1"></div>
+    <div class="chart-note">对数刻度可同时呈现百万级播放与千级点赞，直观展示「播放量梯度」与「点赞量梯度」的错位关系。</div>
+
+    <h3>图 2 · 播放÷粉丝倍数 与 收藏率 双维度</h3>
+    <div class="chart-box" id="chart2"></div>
+    <div class="chart-note">左轴为播放÷粉丝倍数（出圈度，对数刻度），右轴为收藏率（留存度）。注意瑞哥 30.93x 属小号虚高，已做标注。</div>
+
+    <h3>图 3 · 发布时间时间轴（传播节奏）</h3>
+    <div class="chart-box" id="chart3"></div>
+    <div class="chart-note">展示 2025-12 至 2026-08 的发布节奏：2026-01 密集（对比评测 + Skills 实操）、2026-05 横评、2026-08 场景测评与 SEO 教程。</div>
+
+    <h3>交叉验证结论</h3>
+    <ul>
+      <li><strong>「保姆级 + 多P系统教程」是绝对流量王</strong>：韩顺平 2.08x 出圈、102.6 万播放、3.00% 收藏率，是唯一「内容驱动出圈」样本，能同时吃到粉丝盘、搜索长尾与推荐流量。</li>
+      <li><strong>「单点实操干货」是留存之王</strong>：阿众 5 分钟 Skills 教程拿下 4.56% 收藏率（大体量视频中最高），证明「热点概念 + 手把手演示」在转化收藏/复看方面最强。</li>
+      <li><strong>「对比评测」是情绪/曝光之王</strong>：数字游牧人 Cursor vs Trae 拿下 3.61% 点赞率（全场最高），证明「国产 vs 标杆硬刚」最能激发站队与点赞。</li>
+      <li><strong>「横评带出」是覆盖面之王</strong>：鱼皮把 Trae 放进 32 工具横评，2,511 条评论最高，适合做认知广度触达。</li>
+      <li><strong>「SEO 长尾」适合小号冷启动</strong>：瑞哥证明低粉号靠关键词堆砌能精准截流搜索流量，留存质量（投币+收藏率 7.75%）反而最高。</li>
+      <li><strong>「垂直人设跨域」风险高</strong>：戴戴戴师兄 0.20x 倍数（题材错位），说明垂直人设 UP主跨领域带新品牌存在明显折损。</li>
+    </ul>
+  </div>
+
+  <!-- 六、营销启发 -->
+  <div class="card" id="advice">
+    <h2><span class="num">六</span>对 AI Coding 产品营销的启发（7 条可执行策略）</h2>
+    <p>以下策略建议均以本报告量化数据为支撑，供 AI Coding 产品的 B站营销宣传直接参考。</p>
+
+    <div class="strategy-item">
+      <div class="idx">1</div>
+      <div class="body">
+        <div class="t">以「保姆级系统教程矩阵」为主力打法，复制 2.08x 出圈模型</div>
+        <div class="d">韩顺平单条 18P 保姆级教程拿下 102.6 万播放、2.08 倍出圈，证明这是 Trae 在 B站的最优内容形态。建议由多位数码/编程 UP主各自产出「保姆级/零基础/从入门到精通」多P教程，覆盖「trae 教程」「从入门到精通」等搜索长尾词，兼顾粉丝盘、搜索流量与长期留存。</div>
+      </div>
+    </div>
+
+    <div class="strategy-item">
+      <div class="idx">2</div>
+      <div class="body">
+        <div class="t">用「免费 + 国产替代 Cursor」双卖点做标题与心智的固定锚点</div>
+        <div class="d">「免费」撬动点击（韩顺平 102.6 万播放），「国产替代 Cursor」撬动点赞（数字游牧人 3.61% 点赞率全场最高）。建议标题固定组合「免费 + 国产 + 保姆级」，对比内容固定「巅峰对决 Cursor」框架，双锚点稳定拉点击与情绪认同。</div>
+      </div>
+    </div>
+
+    <div class="strategy-item">
+      <div class="idx">3</div>
+      <div class="body">
+        <div class="t">紧跟热点概念做「单点实操」短视频，抓 4.56% 高收藏留存</div>
+        <div class="d">阿众 5 分钟 Skills 教程拿下 4.56% 收藏率（大体量视频中最高），证明「热点概念 + 手把手演示」是高留存利器。建议紧跟 Agent Skill、MCP、SOLO 等 AI 圈热点，用「手把手教你 + 具体动作 + 小白一看就懂」公式做 5-8 分钟单点爆破，把热点流量转化为品牌认知。</div>
+      </div>
+    </div>
+
+    <div class="strategy-item">
+      <div class="idx">4</div>
+      <div class="body">
+        <div class="t">持续产出「国产 vs Cursor」正面对比，做心智卡位</div>
+        <div class="d">数字游牧人「巅峰对决 Cursor vs Trae」3.61% 点赞率证明对比框架最能激发站队与讨论，评论争议本身就是二次传播。建议持续产出对比评测，用「巅峰对决」式悬念标题 + 情绪化结论，借 Cursor 流量做「国产替代」心智占位。</div>
+      </div>
+    </div>
+
+    <div class="strategy-item">
+      <div class="idx">5</div>
+      <div class="body">
+        <div class="t">与头部 UP主合作「横评带出」，低成本获取广度曝光</div>
+        <div class="d">鱼皮 32 工具横评 2,511 条评论（全场最高），Trae 作为「国产代表」软性植入比硬广更可信、覆盖面更广。建议与头部编程 UP主合作横评/榜单类选题，让产品进入「32 个 AI 工具」等高播放语境，做认知广度而非深度种草。</div>
+      </div>
+    </div>
+
+    <div class="strategy-item">
+      <div class="idx">6</div>
+      <div class="body">
+        <div class="t">谨慎投放「垂直人设 UP主」，避免题材错位折损</div>
+        <div class="d">戴戴戴师兄 0.20x 倍数（41 万粉仅 8 万播放）证明垂直人设 UP主跨领域带新品牌存在明显折损。若必须投放数据分析/办公等垂类 UP主，应以「该垂类真实工作流场景」为切口，而非泛泛的「AI 工具测评」。</div>
+      </div>
+    </div>
+
+    <div class="strategy-item">
+      <div class="idx">7</div>
+      <div class="body">
+        <div class="t">补齐官方号势能，借 KOL 流量承接官方私域沉淀</div>
+        <div class="d">B站官方号仅 4.47 万粉丝、214 个投稿，获赞 3.7 万，互动率偏低，与 KOL 单条破百万的传播力形成鲜明反差。建议官方号从「短视频高频输出」转向「承接 KOL 引流 + 深度教程 + 官方资料沉淀」，在 KOL 视频简介/评论区引导关注官方号，把公域流量沉淀为私域。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 附录：真实数据链接 -->
+  <div class="footer-note">
+    <h4>附录 · 真实数据链接（供验证）</h4>
+    <p><strong>6 个视频链接（B站）：</strong></p>
+    <p>
+      · 韩顺平《Trae 保姆级教程》：<a href="https://www.bilibili.com/video/BV1PwBuBtEZo" target="_blank">https://www.bilibili.com/video/BV1PwBuBtEZo</a><br>
+      · 程序员鱼皮《锐评 32 个 AI 编程工具》：<a href="https://www.bilibili.com/video/BV1cq5q6CEu3" target="_blank">https://www.bilibili.com/video/BV1cq5q6CEu3</a><br>
+      · 我是阿众《手把手教你在 TRAE 中创建和使用 Skills》：<a href="https://www.bilibili.com/video/BV1ZTzpBWEhF" target="_blank">https://www.bilibili.com/video/BV1ZTzpBWEhF</a><br>
+      · 数字游牧人《巅峰对决，Cursor TRAE 对比评测》：<a href="https://www.bilibili.com/video/BV1Cx6oBAETu" target="_blank">https://www.bilibili.com/video/BV1Cx6oBAETu</a><br>
+      · 戴戴戴师兄《AI工具测评：TraeWork 数据分析工作流》：<a href="https://www.bilibili.com/video/BV1JRuq6YECr" target="_blank">https://www.bilibili.com/video/BV1JRuq6YECr</a><br>
+      · 瑞哥编程课堂《trae 使用教程 从入门到精通》：<a href="https://www.bilibili.com/video/BV1hZub6bEk4" target="_blank">https://www.bilibili.com/video/BV1hZub6bEk4</a>
+    </p>
+    <p style="margin-top:8px"><strong>B站官方账号：</strong><a href="https://space.bilibili.com/3546726858229991" target="_blank">https://space.bilibili.com/3546726858229991</a>（TRAE_ai，粉丝 44,679）</p>
+    <p style="margin-top:8px"><strong>数据源 API：</strong><br>
+      · 视频详情：<a href="https://api.bilibili.com/x/web-interface/view?bvid=BV1PwBuBtEZo" target="_blank">https://api.bilibili.com/x/web-interface/view?bvid=&lt;BV号&gt;</a><br>
+      · 粉丝数：<a href="https://api.bilibili.com/x/relation/stat?vmid=651245581" target="_blank">https://api.bilibili.com/x/relation/stat?vmid=&lt;UP主mid&gt;</a>
+    </p>
+    <p style="margin-top:10px;color:#8f959e">
+      数据口径说明：本报告所有字段均来自 B站公开 API 实时返回（2026-08-19），未做推算或编造。
+      播放量随自然增长存在个位至百位级差异（如韩顺平 1,025,924 → 1,026,019），属正常现象。
+      瑞哥 30.93x 倍数为「低粉丝基数虚高」，不与其 5,784 绝对播放混同判断。
+    </p>
+  </div>
+</div>
+
+<script>
+  const red = '#C7000B';
+  const redDeep = '#9c0008';
+  const blue = '#3370ff';
+  const green = '#00b42a';
+  const orange = '#ff7d00';
+  const gold = '#f7ba1e';
+  const gray = '#86909c';
+
+  const names = ['韩顺平', '程序员鱼皮', '我是阿众', '数字游牧人', '戴戴戴师兄', '瑞哥编程课堂'];
+  const plays = [1026019, 627094, 334372, 259192, 81472, 5784];
+  const likes = [10553, 13898, 7319, 9353, 415, 139];
+  const mults = [2.08, 0.63, 0.58, 0.62, 0.20, 30.93];
+  const favRates = [3.00, 2.48, 4.56, 1.19, 0.18, 5.50];
+
+  // 图1：播放量与点赞量对比（对数刻度柱状图）
+  const c1 = echarts.init(document.getElementById('chart1'));
+  c1.setOption({
+    backgroundColor: 'transparent',
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    legend: { data: ['播放量', '点赞量'], top: 0, right: 0 },
+    grid: { left: 70, right: 20, top: 40, bottom: 60 },
+    xAxis: {
+      type: 'category', data: names,
+      axisLabel: { interval: 0, rotate: 20, fontSize: 11 }
+    },
+    yAxis: {
+      type: 'log', name: '数量（对数）',
+      axisLabel: { formatter: function(v){ return v >= 10000 ? (v/10000)+'万' : v; } }
+    },
+    series: [
+      { name: '播放量', type: 'bar', data: plays, itemStyle: { color: red }, barMaxWidth: 32,
+        label: { show: true, position: 'top', fontSize: 10, formatter: function(p){ return p.value >= 10000 ? (p.value/10000).toFixed(1)+'万' : p.value; } } },
+      { name: '点赞量', type: 'bar', data: likes, itemStyle: { color: gold }, barMaxWidth: 32,
+        label: { show: true, position: 'top', fontSize: 10, formatter: function(p){ return p.value >= 10000 ? (p.value/10000).toFixed(1)+'万' : p.value; } } }
+    ]
+  });
+
+  // 图2：倍数 + 收藏率 双维度（双轴）
+  const c2 = echarts.init(document.getElementById('chart2'));
+  c2.setOption({
+    backgroundColor: 'transparent',
+    tooltip: { trigger: 'axis', axisPointer: { type: 'cross' } },
+    legend: { data: ['播放÷粉丝倍数', '收藏率'], top: 0, right: 0 },
+    grid: { left: 50, right: 50, top: 40, bottom: 60 },
+    xAxis: { type: 'category', data: names, axisLabel: { interval: 0, rotate: 20, fontSize: 11 } },
+    yAxis: [
+      { type: 'log', name: '倍数（对数）', min: 0.1,
+        axisLabel: { formatter: function(v){ return v+'x'; } } },
+      { type: 'value', name: '收藏率(%)', max: 6,
+        axisLabel: { formatter: function(v){ return v+'%'; } } }
+    ],
+    series: [
+      { name: '播放÷粉丝倍数', type: 'bar', data: mults, yAxisIndex: 0,
+        itemStyle: { color: function(p){ return p.dataIndex === 5 ? gray : blue; } },
+        barMaxWidth: 30,
+        label: { show: true, position: 'top', fontSize: 10, formatter: function(p){ return p.value+'x'; } } },
+      { name: '收藏率', type: 'line', data: favRates, yAxisIndex: 1, smooth: true,
+        itemStyle: { color: red }, lineStyle: { width: 3 },
+        symbol: 'circle', symbolSize: 8,
+        label: { show: true, position: 'top', fontSize: 10, formatter: function(p){ return p.value+'%'; } } }
+    ]
+  });
+
+  // 图3：发布时间时间轴
+  const c3 = echarts.init(document.getElementById('chart3'));
+  const timeData = [
+    ['2025-12-23', '韩顺平\n保姆级教程', 1026019, red, '18P'],
+    ['2026-01-12', '数字游牧人\nCursor对比', 259192, orange, '1P'],
+    ['2026-01-22', '我是阿众\nSkills实操', 334372, green, '1P'],
+    ['2026-05-15', '程序员鱼皮\n32工具横评', 627094, blue, '1P'],
+    ['2026-08-07', '瑞哥\nSEO教程', 5784, gray, '13P'],
+    ['2026-08-11', '戴戴戴师兄\n场景测评', 81472, gold, '1P']
+  ];
+  c3.setOption({
+    backgroundColor: 'transparent',
+    tooltip: {
+      trigger: 'item',
+      formatter: function(p){
+        const d = timeData[p.dataIndex];
+        return d[1].replace('\n',' ') + '<br>发布时间：' + d[0] + '<br>播放：' + d[2].toLocaleString() + '（' + d[4] + '）';
+      }
+    },
+    grid: { left: 60, right: 30, top: 30, bottom: 60 },
+    xAxis: { type: 'time', name: '发布时间', axisLabel: { fontSize: 11 } },
+    yAxis: { type: 'log', name: '播放量（对数）',
+      axisLabel: { formatter: function(v){ return v >= 10000 ? (v/10000)+'万' : v; } } },
+    series: [{
+      type: 'scatter',
+      data: timeData.map(function(d){ return { value: [d[0], d[2]], name: d[1], itemStyle: { color: d[3] } }; }),
+      symbolSize: function(val){ return 12 + Math.log10(val[1]) * 6; },
+      label: { show: true, position: 'top', fontSize: 11, formatter: function(p){ return timeData[p.dataIndex][1]; } },
+      markLine: {
+        silent: true, symbol: 'none',
+        label: { show: false },
+        lineStyle: { color: '#d0d3d9', type: 'dashed' },
+        data: [{ xAxis: '2026-01-01' }, { xAxis: '2026-05-01' }]
+      }
+    }]
+  });
+
+  window.addEventListener('resize', function(){
+    c1.resize(); c2.resize(); c3.resize();
+  });
+</script>
+</body>
+</html>
