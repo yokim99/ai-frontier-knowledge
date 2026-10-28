@@ -1,0 +1,24 @@
+{
+  "_note": "仅为无私人信息的示例配置。实际执行由用户提供或覆盖。",
+  "name": "AI 洞察晨报",
+  "timezone": "Asia/Shanghai",
+  "report_language": "zh-CN",
+  "priority_window": "当日首发/新生效；补昨日遗漏；最近7天仅补录或修订",
+  "focus_segments": [
+    "Coding Agent",
+    "Working Agent",
+    "Personal Agent"
+  ],
+  "allow_emerging_topics": true,
+  "sections": [
+    "AI市场动态",
+    "AI产品动态与运营"
+  ],
+  "style": "每条2~4句、按事件增量、原文深链、空栏目省略",
+  "optional": {
+    "archive_url": null,
+    "topic_index_url": null,
+    "email_delivery_enabled": false,
+    "website_publish_enabled": false
+  }
+}

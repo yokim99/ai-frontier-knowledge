@@ -1,0 +1,24 @@
+{
+  "_note": "合成结构示例；不是任何真实日期的日报，示例域名非事实来源。",
+  "report_date": "2026-10-28",
+  "timezone": "Asia/Shanghai",
+  "cutoff": "2026-10-28T08:00:00+08:00",
+  "items": [
+    {
+      "id": "synthetic-event-001",
+      "section": "AI产品动态与运营",
+      "event_date": "2026-10-27",
+      "title": "合成案例：示例 Agent 发布开发任务入口",
+      "summary": "这是仅用于结构验证的虚构案例，不可作为新闻传播或运营依据。",
+      "source_url": "https://example.org/synthetic",
+      "source_type": "synthetic",
+      "verification": "unverified",
+      "is_backfill": false,
+      "focus_segment": "Coding Agent",
+      "claim_limitations": [
+        "非真实事件"
+      ]
+    }
+  ],
+  "coverage_gaps": []
+}
