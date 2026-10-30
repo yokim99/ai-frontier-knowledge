@@ -14,9 +14,12 @@
       "商业化"
     ],
     "summary": "基于 IDC 2026H1 追踪数据，中国 MaaS 市场规模达到 106.3 亿元、同比增长近 9 倍；火山引擎份额 45.1%。文章进一步把增长路径指向 Managed Agents 与办公智能体。",
-    "reflection": "最值得追踪的不是单一份额，而是收入结构从语言模型扩展到视频生成，以及云厂商开始把竞争主战场从模型调用推向 Agent 托管。厂商稿的数据需保留“公有云外部客户、不含自有业务”的统计口径。",
     "sourceUrl": "https://mp.weixin.qq.com/s/AojJoHUYjPbl14Tzq6eBCw",
-    "reportUrl": "https://github.com/yokim99/ai-frontier-knowledge/blob/main/%E6%96%87%E7%AB%A0%E5%88%86%E6%9E%90/%E8%A1%8C%E4%B8%9A%E7%A0%94%E7%A9%B6/2026-10-29_%E4%B8%AD%E5%9B%BDMaaS%E5%B8%82%E5%9C%BA_%E7%81%AB%E5%B1%B1%E5%BC%95%E6%93%8E45%E4%BB%BD%E9%A2%9D_AojJoHUYjPbl14Tzq6eBCw.md"
+    "reportUrl": "https://github.com/yokim99/ai-frontier-knowledge/blob/main/%E6%96%87%E7%AB%A0%E5%88%86%E6%9E%90/%E8%A1%8C%E4%B8%9A%E7%A0%94%E7%A9%B6/2026-10-29_%E4%B8%AD%E5%9B%BDMaaS%E5%B8%82%E5%9C%BA_%E7%81%AB%E5%B1%B1%E5%BC%95%E6%93%8E45%E4%BB%BD%E9%A2%9D_AojJoHUYjPbl14Tzq6eBCw.md",
+    "track": "market",
+    "trackLabel": "商业与模型",
+    "userReflectionStatus": "待补充",
+    "userReflection": "你要求提炼这篇文章的核心观点和价值数据后收录，说明它对你有长期保存价值；更具体的个人判断尚未记录。"
   },
   {
     "id": "maas-idc-top3",
@@ -33,9 +36,12 @@
       "单位经济"
     ],
     "summary": "同样引用 IDC 2026H1 报告，但补充了厂商收入绝对值、火山引擎 150 亿元年度目标，以及 Anthropic“每 1 美元算力投入换回 2 美元收入”的类比。",
-    "reflection": "这篇的价值在增量数据：用绝对收入而非 Token 或 ARR 判断商业化质量。它与火山引擎稿同源，适合互证，不能当作两份独立行业证据。",
     "sourceUrl": "https://mp.weixin.qq.com/s/B12z3pQyqoZWpUDB5Nz-dw",
-    "reportUrl": "https://github.com/yokim99/ai-frontier-knowledge/blob/main/%E6%96%87%E7%AB%A0%E5%88%86%E6%9E%90/%E8%A1%8C%E4%B8%9A%E7%A0%94%E7%A9%B6/2026-10-29_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%94%B6%E5%85%A5TOP3_B12z3pQyqoZWpUDB5Nz-dw.md"
+    "reportUrl": "https://github.com/yokim99/ai-frontier-knowledge/blob/main/%E6%96%87%E7%AB%A0%E5%88%86%E6%9E%90/%E8%A1%8C%E4%B8%9A%E7%A0%94%E7%A9%B6/2026-10-29_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%94%B6%E5%85%A5TOP3_B12z3pQyqoZWpUDB5Nz-dw.md",
+    "track": "market",
+    "trackLabel": "商业与模型",
+    "userReflectionStatus": "待补充",
+    "userReflection": "你明确说“这个文章也收录下”，认为它和上一篇同样值得保存；更具体的个人判断尚未记录。"
   },
   {
     "id": "anthropic-s1",
@@ -52,9 +58,12 @@
       "财务"
     ],
     "summary": "Anthropic 披露 2026 年上半年收入 162.86 亿美元、经营亏损 6.93 亿美元；过去 12 个月贡献至少 10 万美元收入的客户超过 11,900 家。巨额净亏损主要包含可转债、衍生负债及 SAFE 公允价值变动。",
-    "reflection": "判断模型公司的经营质量，要分开看收入增长、经营亏损、现金消耗和公允价值损失。客户数量与收入集中度也比单看估值更能解释可持续性。",
     "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
-    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/reports/2026-10-27/#anthropic-s1-2026-10-26"
+    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/reports/2026-10-27/#anthropic-s1-2026-10-26",
+    "track": "market",
+    "trackLabel": "商业与模型",
+    "userReflectionStatus": "待补充",
+    "userReflection": "你在 AI 洞察晨报中点了赞，表示这篇内容对你有价值；更具体的个人感想尚未记录。"
   },
   {
     "id": "openai-terra",
@@ -71,9 +80,12 @@
       "Computer Use"
     ],
     "summary": "Terra 侧重视觉推理、电脑操作与日常工作，标准 API 输入 1 美元/百万 Token、输出 5 美元，已进入 ChatGPT Work、Codex 与 API。",
-    "reflection": "低价与电脑操作能力一起出现，说明竞争焦点正在从“更强模型”转向“可大规模部署的工作模型”。官方基准仍需用真实任务成本和成功率复核。",
     "sourceUrl": "https://openai.com/index/introducing-gpt-6-1-terra/",
-    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/reports/2026-10-27/#openai-terra-2026-10-26"
+    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/reports/2026-10-27/#openai-terra-2026-10-26",
+    "track": "market",
+    "trackLabel": "商业与模型",
+    "userReflectionStatus": "待补充",
+    "userReflection": "你在 AI 洞察晨报中点了赞，表示这篇内容对你有价值；更具体的个人感想尚未记录。"
   },
   {
     "id": "anthropic-drug",
@@ -90,9 +102,12 @@
       "行业落地"
     ],
     "summary": "六家医药组织展示了抗体设计与生产文件审阅等案例：约一个月生成 3.5 万种设计，文档审阅时间据合作方称减少 89%。多数成果尚未进入人体试验。",
-    "reflection": "AI 在药研中的近期价值更像“候选生成和流程压缩”，距离临床成功仍有很长验证链。应把流程效率、实验命中和最终疗效分开衡量。",
     "sourceUrl": "https://www.anthropic.com/research/early-progress-drug-development",
-    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/reports/2026-10-28/#anthropic-claude-drug-development-2026-10-27"
+    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/reports/2026-10-28/#anthropic-claude-drug-development-2026-10-27",
+    "track": "market",
+    "trackLabel": "商业与模型",
+    "userReflectionStatus": "待补充",
+    "userReflection": "你在 AI 洞察晨报中点了赞，表示这篇内容对你有价值；更具体的个人感想尚未记录。"
   },
   {
     "id": "anthropic-gsa",
@@ -109,9 +124,12 @@
       "企业获客"
     ],
     "summary": "美国联邦及州、地方、部落政府采购 Claude Enterprise、Government 与 API 可享 40% 折扣，无最低消费承诺；云渠道与实施支持将逐步补齐。",
-    "reflection": "政府市场的增长不是单靠降价，合同入口、云渠道、实施支持和合规共同决定转化。厂商披露的整体活跃增长不能归因于本次折扣。",
     "sourceUrl": "https://www.anthropic.com/news/expanding-partnership-gsa",
-    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/reports/2026-10-28/#anthropic-gsa-discount-2026-10-27"
+    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/reports/2026-10-28/#anthropic-gsa-discount-2026-10-27",
+    "track": "growth",
+    "trackLabel": "增长与治理",
+    "userReflectionStatus": "待补充",
+    "userReflection": "你在 AI 洞察晨报中点了赞，表示这篇内容对你有价值；更具体的个人感想尚未记录。"
   },
   {
     "id": "openai-oracle",
@@ -128,9 +146,12 @@
       "企业工作流"
     ],
     "summary": "Oracle AI Workspace 计划把企业应用、数据和获授权操作连接到 ChatGPT，覆盖财务、采购等跨系统任务；目前尚未公布正式可用日期。",
-    "reflection": "ChatGPT 正从问答入口变成企业工作流的编排层。真正的护城河会落在权限映射、业务语义和可审计执行，而不是一个演示中的跨系统动作。",
     "sourceUrl": "https://openai.com/index/oracle-apps-in-chatgpt/",
-    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/reports/2026-10-28/#openai-oracle-apps-chatgpt-2026-10-27"
+    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/reports/2026-10-28/#openai-oracle-apps-chatgpt-2026-10-27",
+    "track": "agent",
+    "trackLabel": "Agent 与产品",
+    "userReflectionStatus": "待补充",
+    "userReflection": "你在 AI 洞察晨报中点了赞，表示这篇内容对你有价值；更具体的个人感想尚未记录。"
   },
   {
     "id": "servicenow-chatgpt",
@@ -147,9 +168,12 @@
       "企业 Agent"
     ],
     "summary": "IT 人员可在 ChatGPT 中查询相似故障、评估变更风险并更新 ServiceNow 记录；可操作范围由企业实例、权限与业务规则决定，交互式体验仍在预览。",
-    "reflection": "MCP 的关键意义是让对话从“给答案”走到“推进记录与流程”。企业采用速度取决于权限、审计和失败回滚能否跟上执行能力。",
     "sourceUrl": "https://openai.com/index/openai-servicenow-partnership-expansion/",
-    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/reports/2026-10-29/#openai-servicenow-workflows-2026-10-28"
+    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/reports/2026-10-29/#openai-servicenow-workflows-2026-10-28",
+    "track": "agent",
+    "trackLabel": "Agent 与产品",
+    "userReflectionStatus": "待补充",
+    "userReflection": "你在 AI 洞察晨报中点了赞，表示这篇内容对你有价值；更具体的个人感想尚未记录。"
   },
   {
     "id": "copilot-cloud",
@@ -166,9 +190,12 @@
       "云沙箱"
     ],
     "summary": "付费 Copilot 用户可在网页、手机、CLI 或 VS Code 发起任务并跨端继续，默认运行在可恢复云沙箱；云沙箱从 11 月起计入共享 Actions 计算额度。",
-    "reflection": "跨端连续性降低了“必须守在 IDE 前”的任务摩擦，是 Agent 从工具走向委托系统的重要一步。后续要观察计算成本、状态恢复和企业权限是否让体验真正闭环。",
     "sourceUrl": "https://github.blog/changelog/2026-10-28-work-from-anywhere-with-a-new-connected-copilot-cloud-experience/",
-    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/reports/2026-10-29/#github-copilot-connected-cloud-2026-10-28"
+    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/reports/2026-10-29/#github-copilot-connected-cloud-2026-10-28",
+    "track": "agent",
+    "trackLabel": "Agent 与产品",
+    "userReflectionStatus": "待补充",
+    "userReflection": "你在 AI 洞察晨报中点了赞，表示这篇内容对你有价值；更具体的个人感想尚未记录。"
   },
   {
     "id": "openai-monitoring",
@@ -185,9 +212,12 @@
       "红队"
     ],
     "summary": "监控先用轻量检测和抽样，再由审查模型及调查 Agent 复核，部分高风险情形通知人员；外部红队曾发现早期系统漏洞，内部 Codex 流量也并非全部配置全天候人工告警。",
-    "reflection": "Agent 安全更像一套持续运营的检测系统，而不是一次性“通过安全评测”。覆盖范围、误报漏报、人类告警和自动暂停条件都应被单独披露。",
     "sourceUrl": "https://openai.com/index/how-we-detect-frontier-model-misalignment/",
-    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/#openai-misalignment-monitoring-2026-10-28"
+    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/#openai-misalignment-monitoring-2026-10-28",
+    "track": "growth",
+    "trackLabel": "增长与治理",
+    "userReflectionStatus": "待补充",
+    "userReflection": "你在 AI 洞察晨报中点了赞，表示这篇内容对你有价值；更具体的个人感想尚未记录。"
   },
   {
     "id": "google-connected-apps",
@@ -204,9 +234,12 @@
       "应用分发"
     ],
     "summary": "开发者可通过云端 MCP 服务器或 Android AppFunctions 接入，在统一控制台测试并选择提交至 Gemini、搜索或两者，同时查看流量、延迟与错误率。",
-    "reflection": "AI 应用分发正在形成新的“搜索 + 助手”双入口。平台统一了接入与数据面板，也会把审核、排序和流量依赖集中到新的控制层。",
     "sourceUrl": "https://blog.google/innovation-and-ai/technology/developers-tools/connected-apps-one-place/",
-    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/#google-connected-apps-platform-2026-10-28"
+    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/#google-connected-apps-platform-2026-10-28",
+    "track": "agent",
+    "trackLabel": "Agent 与产品",
+    "userReflectionStatus": "待补充",
+    "userReflection": "你在 AI 洞察晨报中点了赞，表示这篇内容对你有价值；更具体的个人感想尚未记录。"
   },
   {
     "id": "gemini-files",
@@ -223,9 +256,12 @@
       "工作流"
     ],
     "summary": "Gemini 可在对话中生成、预览并编辑 PDF、文档、表格、演示文稿和代码，支持手动修改与选中文本局部调整；部分格式暂仅网页支持。",
-    "reflection": "把生成、查看和局部修改放进同一个界面，补上了文件型 Agent 的反馈闭环。下一步要看版本管理、格式保真与多人协作是否同样顺滑。",
     "sourceUrl": "https://blog.google/innovation-and-ai/products/gemini-app/edit-files-directly/",
-    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/#google-gemini-file-editing-2026-10-29"
+    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/#google-gemini-file-editing-2026-10-29",
+    "track": "agent",
+    "trackLabel": "Agent 与产品",
+    "userReflectionStatus": "待补充",
+    "userReflection": "你在 AI 洞察晨报中点了赞，表示这篇内容对你有价值；更具体的个人感想尚未记录。"
   },
   {
     "id": "github-enterprise-copilot",
@@ -242,8 +278,11 @@
       "企业增长"
     ],
     "summary": "符合条件的 GitHub Enterprise Cloud 客户可让持有 Enterprise 许可的成员获得 Copilot 访问权，AI 使用从首次请求起计入企业预算；自助订阅暂未开放。",
-    "reflection": "把 Copilot 访问并入企业许可降低了席位采购阻力，同时把增长约束转移到用量预算。需要观察实际启用率和人均 AI 支出，而不只看“包含访问权”。",
     "sourceUrl": "https://github.blog/changelog/2026-10-28-github-enterprise-now-includes-access-to-github-copilot/",
-    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/#github-enterprise-copilot-access-2026-10-28"
+    "reportUrl": "https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/#github-enterprise-copilot-access-2026-10-28",
+    "track": "growth",
+    "trackLabel": "增长与治理",
+    "userReflectionStatus": "待补充",
+    "userReflection": "你在 AI 洞察晨报中点了赞，表示这篇内容对你有价值；更具体的个人感想尚未记录。"
   }
 ]

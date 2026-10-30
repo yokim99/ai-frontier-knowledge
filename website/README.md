@@ -1,10 +1,22 @@
 # 网站源文件
 
-本目录是 [AI 前沿文章收藏](https://ai-frontier-library-luoqing.wulizhenmin.chatgpt.site) 的静态前端副本。
+本目录是 [AI 前沿读库](https://ai-frontier-library-luoqing.wulizhenmin.chatgpt.site) 的静态前端副本。
+
+## 信息架构
+
+1. 重点阅读：先回答今天最值得读什么。
+2. 三条主题脉络：商业与模型、Agent 与产品、增长与治理。
+3. 完整文章：保留标题、信息概要、用户感想状态和原始链接。
+4. 附录：集中连接每日洞察与 GitHub 知识库。
+
+## 内容边界
+
+“我的感想”只记录用户明确说过的判断。只有点赞或收藏证据时，显示该事实并标记“待补充”，不以编辑备注代替用户观点。
 
 - `index.html`：信息架构与页面结构
 - `styles.css`：响应式视觉样式
-- `app.js`：搜索、来源筛选与主题筛选
+- `app.js`：搜索、来源筛选与主题脉络筛选
 - `articles.json`：文章卡片数据
+- `DESIGN.md`：设计方向与内容原则
 
 网站部署由 Sites 托管；知识内容的长期主版本在本仓库。

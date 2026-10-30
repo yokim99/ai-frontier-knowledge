@@ -1,27 +1,87 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="个人 AI 前沿文章收藏与每日洞察精选">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="个人 AI 前沿文章收藏：先看重点，再循主题，最后回到原文。">
   <title>AI 前沿文章收藏</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar"><a class="brand" href="#top">FRONTIER / 读库</a><nav><a href="#featured">重点</a><a href="#library">全部</a><a href="#appendix">附录</a></nav></header>
+  <div class="reading-progress" id="reading-progress"></div>
+  <header class="site-header">
+    <a class="brand" href="#top"><span class="brand-mark">青</span><span>AI 前沿读库</span></a>
+    <nav aria-label="阅读层级">
+      <a href="#level-1">1 重点</a><a href="#level-2">2 脉络</a><a href="#level-3">3 文章</a><a href="#appendix">附录</a>
+    </nav>
+  </header>
+
   <main id="top">
-    <section class="hero">
-      <div class="hero-copy"><p class="eyebrow">PERSONAL SIGNAL ARCHIVE · 2026</p><h1>把前沿噪声，<br><em>压成可复用的判断。</em></h1><p class="lead">个人收藏 × 每日洞察点赞。每篇保留摘要、阅读感想与原始出处，让“看过”变成能检索、能比较、能复盘的长期知识。</p><div class="hero-actions"><a class="primary" href="#library">进入文章库 ↓</a><a class="secondary" href="https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/archive/" target="_blank" rel="noreferrer">打开完整日报 ↗</a></div></div>
-      <aside class="signal-panel"><span class="panel-no">01 / SIGNALS</span><div class="big-number" id="article-count">13</div><p>篇已整理文章</p><div class="signal-grid"><div><b id="star-count">7</b><span>重点加星</span></div><div><b id="topic-count">7</b><span>主题分层</span></div><div><b>2</b><span>内容来源</span></div></div><div class="stamp">UPDATED<br>2026.10.30</div></aside>
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="kicker">我的 AI 前沿阅读系统</p>
+        <h1>先看重点，<br>再顺着脉络找到原文。</h1>
+        <p class="hero-lead">把个人收藏与每日洞察点赞放在同一套层级里。首页只解决四个问题：什么最值得读、属于哪条趋势、文章说了什么、我当时怎么想。</p>
+        <div class="hero-actions"><a class="button primary" href="#level-1">开始分层阅读</a><a class="button quiet" href="#level-3">直接搜索文章</a></div>
+        <dl class="hero-stats"><div><dt id="count-all">13</dt><dd>篇文章</dd></div><div><dt id="count-starred">7</dt><dd>篇重点</dd></div><div><dt>3</dt><dd>条主题线</dd></div></dl>
+      </div>
+      <aside class="path-card" aria-label="三层阅读路径">
+        <div class="path-line"></div>
+        <div class="path-step"><span>1</span><div><b>先看重点</b><p>用星标决定今天读什么</p></div></div>
+        <div class="path-step"><span>2</span><div><b>再看脉络</b><p>把单篇信息放回趋势线</p></div></div>
+        <div class="path-step"><span>3</span><div><b>最后看证据</b><p>核对概要、我的感想与原文</p></div></div>
+        <p class="path-note">这是一条真实阅读顺序，因此数字表示层级，而不是装饰。</p>
+      </aside>
     </section>
-    <section class="ticker" aria-label="主题速览"><span>AGENT & PLATFORM</span><span>MODEL ECONOMICS</span><span>PRODUCT EXPERIENCE</span><span>GROWTH & OPERATIONS</span><span>SAFETY & GOVERNANCE</span></section>
-    <section id="featured" class="section"><div class="section-head"><div><p class="eyebrow">EDITOR'S PICK</p><h2>重点阅读</h2></div><p>加星文章代表需要持续跟踪的结构性信号。星标用于阅读优先级，不代表事实已被多源证实。</p></div><div id="featured-grid" class="featured-grid"></div></section>
-    <section id="library" class="section library"><div class="section-head"><div><p class="eyebrow">KNOWLEDGE INDEX</p><h2>文章索引</h2></div><p id="result-count"></p></div>
-      <div class="toolbar"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="搜索标题、摘要、标签…" autocomplete="off"></label><div id="source-filters" class="filters" aria-label="来源筛选"></div></div>
-      <div class="topic-strip" id="topic-filters" aria-label="主题筛选"></div><div id="article-grid" class="article-grid"></div><div id="empty" class="empty" hidden>没有匹配的文章，试试清空筛选。</div>
+
+    <section id="level-1" class="layer layer-one">
+      <div class="wrap">
+        <header class="layer-head"><span class="layer-number">1</span><div><p>结论层</p><h2>重点阅读</h2><span>先压缩选择，再开始阅读。</span></div></header>
+        <div id="featured-list" class="featured-list"></div>
+      </div>
     </section>
-    <section id="appendix" class="appendix"><div><p class="eyebrow">APPENDIX</p><h2>继续往深处读</h2><p>完整日报保留每期全部文章与原文链接；GitHub 知识库保留长文分析、证据台账和本网站的数据文件。</p></div><div class="appendix-links"><a href="https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/" target="_blank" rel="noreferrer"><span>每日洞察·最新一期</span><b>打开 ↗</b></a><a href="https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/archive/" target="_blank" rel="noreferrer"><span>每日洞察·全部日期</span><b>打开 ↗</b></a><a href="https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/topics/" target="_blank" rel="noreferrer"><span>每日洞察·主题聚合</span><b>打开 ↗</b></a><a href="https://github.com/yokim99/ai-frontier-knowledge" target="_blank" rel="noreferrer"><span>GitHub AI 前沿知识库</span><b>打开 ↗</b></a></div></section>
-  </main><footer><span>AI FRONTIER KNOWLEDGE · LUOQING</span><span>内容会随你的收藏持续生长</span></footer>
+
+    <section id="level-2" class="layer layer-two">
+      <div class="wrap">
+        <header class="layer-head"><span class="layer-number">2</span><div><p>归纳层</p><h2>三条主题脉络</h2><span>同类文章放在一起，才能看到变化方向。</span></div></header>
+        <div class="tracks">
+          <article class="track-card track-market"><div class="track-icon">◌</div><p>脉络 A</p><h3>商业与模型</h3><span>模型如何定价、产生收入，并进入真实行业。</span><div class="subtopics">行业商业化 · 模型与技术 · 行业落地</div><button data-track="market">沿这条线阅读 <b id="market-count"></b></button></article>
+          <article class="track-card track-agent"><div class="track-icon">⌁</div><p>脉络 B</p><h3>Agent 与产品</h3><span>入口、工作流和产品体验如何形成任务闭环。</span><div class="subtopics">Agent 与平台 · 产品体验</div><button data-track="agent">沿这条线阅读 <b id="agent-count"></b></button></article>
+          <article class="track-card track-growth"><div class="track-icon">◇</div><p>脉络 C</p><h3>增长与治理</h3><span>采用机制、定价、权限与安全如何共同影响增长。</span><div class="subtopics">增长与运营 · 安全与治理</div><button data-track="growth">沿这条线阅读 <b id="growth-count"></b></button></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="level-3" class="layer layer-three">
+      <div class="wrap">
+        <header class="layer-head"><span class="layer-number">3</span><div><p>证据层</p><h2>完整文章</h2><span>标题、概要、我的感想和链接都在这里。</span></div></header>
+        <div class="library-tools">
+          <label class="search-box"><span>搜索</span><input id="search" type="search" placeholder="输入标题、主题或标签" autocomplete="off"></label>
+          <div class="filter-row" id="kind-filters" aria-label="来源筛选"></div>
+          <button class="clear-filter" id="clear-filter" type="button">清空筛选</button>
+        </div>
+        <div class="active-filter" id="active-filter">全部文章</div>
+        <div id="article-list" class="article-list"></div>
+        <div id="empty-state" class="empty-state" hidden><b>没有找到匹配文章</b><span>换个关键词，或清空筛选。</span></div>
+      </div>
+    </section>
+
+    <section id="appendix" class="appendix">
+      <div class="wrap appendix-grid">
+        <div><p class="kicker">附录</p><h2>回到完整资料</h2><p>主页面结束在文章证据；所有外部资料集中放在附录，避免阅读过程中频繁跳出。</p></div>
+        <div class="appendix-links">
+          <a href="https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/" target="_blank" rel="noreferrer"><span>每日洞察 · 最新一期</span><b>打开</b></a>
+          <a href="https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/archive/" target="_blank" rel="noreferrer"><span>每日洞察 · 全部日期</span><b>打开</b></a>
+          <a href="https://ai-insight-daily-luoqing-20261026.wulizhenmin.chatgpt.site/topics/" target="_blank" rel="noreferrer"><span>每日洞察 · 主题聚合</span><b>打开</b></a>
+          <a href="https://github.com/yokim99/ai-frontier-knowledge" target="_blank" rel="noreferrer"><span>GitHub · AI 前沿知识库</span><b>打开</b></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer><span>AI 前沿读库</span><a href="#top">回到顶部</a></footer>
   <script src="app.js"></script>
-</body></html>
+</body>
+</html>
