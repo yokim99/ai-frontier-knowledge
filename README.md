@@ -46,6 +46,12 @@ flowchart TD
 | --- | --- | --- |
 | [重要行业资料（待补全文）](./文章分析/行业研究/2026-10-29_重要行业资料_B12z3pQyqoZWpUDB5Nz-dw.md) | 2026-10-29 | 指定为重要行业价值信息；已收藏原始链接，标题、正文和细分主题待补，尚未形成研究结论。 |
 
+## 相关 Skills
+
+可复用 Skill 统一在 [agent_learning/skills](https://github.com/yokim99/agent_learning/tree/main/skills) 维护（私有仓库，需相应访问权限）。
+
+- [每日 AI 洞察简报 · track-ai-coding](https://github.com/yokim99/agent_learning/tree/main/skills/track-ai-coding)：已于 2026-10-30 从本仓库迁出，完整保留原目录、脚本与参考资料。
+
 ## 阅读与维护
 
 - WorkBuddy优先阅读完整版，初版保留演进记录；[B站报告版本与来源](./文章分析/bilibili/README.md)。
