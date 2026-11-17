@@ -284,5 +284,27 @@
     "trackLabel": "增长与治理",
     "userReflectionStatus": "待补充",
     "userReflection": "你在 AI 洞察晨报中点了赞，表示这篇内容对你有价值；更具体的个人感想尚未记录。"
+  },
+  {
+    "id": "ai-office-context-ecosystem-vXcj0ZrGHzo1WNABKQNz9g",
+    "title": "AI 办公竞争：上下文与办公生态",
+    "date": "2026-11-17",
+    "dateType": "收录日期",
+    "source": "微信公众号",
+    "kind": "个人收藏",
+    "topic": "Agent 与平台",
+    "level": "重点",
+    "starred": true,
+    "tags": [
+      "办公 Agent",
+      "业务上下文",
+      "办公生态"
+    ],
+    "summary": "原文摘要待补。值得追踪的问题是：AI 能否借助相关业务上下文和办公工具，更快交付更准确的可用结果？",
+    "sourceUrl": "https://mp.weixin.qq.com/s/vXcj0ZrGHzo1WNABKQNz9g",
+    "track": "agent",
+    "trackLabel": "Agent 与产品",
+    "userReflectionStatus": "已记录",
+    "userReflection": "AI办公竞争会转入深水区，变成上下文和办公生态的竞争，决定ai输出能否更准更快"
   }
 ]
